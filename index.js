@@ -48,8 +48,8 @@ module.exports = function (content) {
 
     var html;
 
-    if (content.match(/module\.exports/)) {
-        html = '(function() { ' + content.replace(/module\.exports\s*=/, 'return ') + ' })()';
+    if (content.match(/module\.exports\s*=/m)) {
+        html = '(function() { ' + content.replace(/module\.exports\s*=(?!(.|\n)*module\.exports\s*=)/m, 'return ') + ' })()';
     } else {
         html = content;
     }

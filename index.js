@@ -48,10 +48,8 @@ module.exports = function (content) {
 
     var html;
 
-    if (content.match(/^module\.exports/)) {
-        var firstQuote = findQuote(content, false);
-        var secondQuote = findQuote(content, true);
-        html = content.substr(firstQuote, secondQuote - firstQuote + 1);
+    if (content.match(/module\.exports/)) {
+        html = '(function() { ' + content.replace(/module\.exports\s*=/, 'return ') + ' })()';
     } else {
         html = content;
     }
